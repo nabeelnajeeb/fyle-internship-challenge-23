@@ -1,0 +1,12 @@
+<!--<p>Repositories Found!</p>-->
+
+<!-- github-repo-list.component.html -->
+<div class="repo-list">
+    <div *ngFor="let repo of repositories" class="repo-item">
+      <h3><a [href]="repo.html_url" target="_blank">{{ repo.name }}</a></h3>
+      <p>{{ repo.description }}</p>
+      <span>Language: {{ repo.language }}</span>
+      <!-- Add more details as needed -->
+    </div>
+  </div>
+  

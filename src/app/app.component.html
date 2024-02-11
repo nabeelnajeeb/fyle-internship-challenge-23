@@ -1,5 +1,48 @@
-<div class="grid h-screen place-items-center">
-  <div class="font-bold text-3xl">
+
+  <div id="title" class="font-bold text-1xl">
     Fyle Internship Challenge
-  </div>
+  </div> 
+  <!--<div style="text-align:center">
+    <h1>
+      GitHub Repository Viewer
+    </h1>
+  </div> !-->
+  
+  <!-- app.component.html -->
+
+<div style="text-align:center">
+  <h1>GitHub Repository Viewer</h1>
 </div>
+
+<div class="container">
+  <label for="username">GitHub Username:</label>
+  <input type="text" id="username" [(ngModel)]="username" />
+  <button (click)="searchRepositories()">Search Repositories</button>
+
+  <div *ngIf="loading; else content">
+    <!-- Skeleton loader -->
+    <div class="skeleton-loader"></div>
+  </div>
+
+  <ng-template #content>
+    <div *ngIf="userNotFound; else repositoriesList">
+      <p>User not found.</p>
+    </div>
+
+    <ng-template #repositoriesList>
+      <app-github-repo-list *ngIf="repositories" [repositories]="repositories"></app-github-repo-list>
+
+      <div class="pagination">
+        <label for="pageSize">Page Size:</label>
+        <select id="pageSize" [(ngModel)]="pageSize" (change)="loadRepositories()">
+          <option value="10">10</option>
+          <option value="30">30</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+        <!--<button (click)="loadRepositories()">Load Repositories</button>-->
+      </div>
+    </ng-template>
+  </ng-template>
+</div>
+
